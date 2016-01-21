@@ -79,7 +79,7 @@ MStatus blastCmd::fileDump(MTime frame) {
 		iffPixels++;
 	};
 
-	if (iffOutput.writeToFile(filename + '.jpg', 'jpg') != MS::kSuccess) {
+	if (iffOutput.writeToFile(filename + '.jpg') != MS::kSuccess) {
 		sprintf(msgBuffer, "Failed to output image to %s\n", filename.asChar());
 		MGlobal::displayError(msgBuffer);
 		stat = MS::kFailure;
@@ -157,7 +157,7 @@ MStatus blastCmd::doIt(const MArgList& args) {
 	}
 
 	// Output the pixels to disk    
-	fileDump(curTime);
+	fileDump(start);
 
 	// deallocate
 
