@@ -1,21 +1,8 @@
-//-
-// ==========================================================================
-// Copyright 2015 Autodesk, Inc.  All rights reserved.
-//
-// Use of this software is subject to the terms of the Autodesk
-// license agreement provided at the time of installation or download,
-// or which otherwise accompanies this software in either electronic
-// or hard copy form.
-// ==========================================================================
-//+
-//
-// blastCmd.cpp
-//
-// This plugin is an example which uses the offscreen rendering API
-// extension.
-//
+// Referenced from blastCmd.cpp (Copyright 2015 Autodesk)
 
 #include "blast.h"
+
+#pragma mark GLBuffer
 
 MyMPxGlBuffer::MyMPxGlBuffer(M3dView &view) : MPxGlBuffer(view) {}
 
@@ -27,82 +14,58 @@ void MyMPxGlBuffer::beginBufferNotify() {
 
 void MyMPxGlBuffer::endBufferNotify() {}
 
-//
-// Command class implementation
-//
-blastCmd::blastCmd()
-{
+#pragma mark Creation and Destruction
+
+blastCmd::blastCmd() {
 	offBuff = NULL;
 }
-blastCmd::~blastCmd()
-{
-	// This should already be deleted but just to be safe
-	//
+
+blastCmd::~blastCmd() {
 	delete offBuff;
 }
-void* blastCmd::creator()
-{
+
+void *blastCmd::creator() {
 	return (void *)(new blastCmd);
 }
-MSyntax blastCmd::newSyntax()
-{
+
+#pragma mark Argument Handling
+
+MSyntax blastCmd::newSyntax() {
 	MSyntax syntax;
 	syntax.addFlag(kOnscreenFlag, kOnscreenFlagLong);
 	syntax.addFlag(kFilenameFlag, kFilenameFlagLong, MSyntax::kString);
-	syntax.addFlag(kStartFlag, kStartFlagLong, MSyntax::kTime);
-	syntax.addFlag(kEndFlag, kEndFlagLong, MSyntax::kTime);
 	return syntax;
 }
-MStatus blastCmd::parseArgs(const MArgList& args)
-{
+
+MStatus blastCmd::parseArgs(const MArgList& args) {
 	MStatus stat = MS::kSuccess;
-	MArgDatabase    argData(syntax(), args);
+	MArgDatabase argData(syntax(), args);
 	onscreen = argData.isFlagSet(kOnscreenFlag);
 	start = 0.0;
-	end = 1.0;
-	if (argData.isFlagSet(kFilenameFlag))
-	{
+	if (argData.isFlagSet(kFilenameFlag)) {
 		stat = argData.getFlagArgument(kFilenameFlag, 0, filename);
-	}
-	else
-	{
+	} else {
 		filename = "blastOut";
-	}
-	if (argData.isFlagSet(kStartFlag))
-	{
-		argData.getFlagArgument(kStartFlag, 0, start);
-	}
-	if (argData.isFlagSet(kEndFlag))
-	{
-		argData.getFlagArgument(kEndFlag, 0, end);
 	}
 	return stat;
 }
-MStatus blastCmd::fileDump(MTime frame)
-{
-	MStatus stat = MS::kFailure;    // Status code
-	MString suffixName(filename);
-	suffixName += ".";
-	suffixName += frame.value();
-	// 
-	//  Copy the pixels from the offscreen buffer into the MImage for export
-	//
 
-#ifdef OUTPUT_IFF_FILES
-	char msgBuffer[256];
-	//  Use the API to output a Maya IFF file
+MStatus blastCmd::fileDump(MTime frame) {
+	MStatus stat = MS::kFailure;
 
-	MImage  iffOutput;
-	if (iffOutput.create(fWidth, fHeight) != MS::kSuccess)
-	{
-		cerr << "Failed to create output image\n";
+	char msgBuffer[256]; // to save xostly stdout calls
+
+	MImage iffOutput;
+	if (iffOutput.create(fWidth, fHeight) != MS::kSuccess) {
+		cerr << "Failed to create output image\n" << endl;
 		return MS::kFailure;
 	}
+
 	unsigned char *iffPixels = iffOutput.pixels();
 	unsigned char *glPixels = fPixels;
-	for (int pixCtr = 0; pixCtr < fPixelCnt; pixCtr++)
-	{
-		*iffPixels = *glPixels; // R
+
+	for (int pixCtr = 0; pixCtr < fPixelCnt; pixCtr++) {
+		*iffPixels = *glPixels;     // R
 		glPixels++;
 		iffPixels++;
 		*iffPixels = *glPixels;     // G 
@@ -115,173 +78,104 @@ MStatus blastCmd::fileDump(MTime frame)
 		glPixels++;
 		iffPixels++;
 	};
-	//
-	// Dump the image to the output file. You can specify a different 
-	// file format by providing a type string to the output function, i.e.
-	//
-	//      writeToFile(suffixName, "jpg" )
-	//      writeToFile(suffixName, "tif" )
-	//
-	if (iffOutput.writeToFile(suffixName) != MS::kSuccess)
-	{
-		// Oops, we failed (somehow), tell the user about it.
-		//
-		sprintf(msgBuffer, "Failed to output image to %s\n", suffixName.asChar());
+
+	if (iffOutput.writeToFile(filename + '.jpg', 'jpg') != MS::kSuccess) {
+		sprintf(msgBuffer, "Failed to output image to %s\n", filename.asChar());
 		MGlobal::displayError(msgBuffer);
 		stat = MS::kFailure;
-	}
-	else
-	{
-		// It worked.  Tell the user about our success.
-		//
+	} else {
 		sprintf(msgBuffer, "output from %s buffer to %s done.\n",
 			(onscreen ? "on-screen" : "off-screen"),
-			suffixName.asChar());
+			filename.asChar());
 		MGlobal::displayInfo(msgBuffer);
 		stat = MS::kSuccess;
 	}
-#else
 
-	//  Use standard Linux tools to write/view the file
-	// Dump out the image as an ImageMagik file, use the 'display' command in Linux
-	// to view it
-	ofstream    image(suffixName.asChar());
-	//
-	//  ImageMagik header
-	//
-	image << "id=ImageMagick\n";
-	image << "columns= " << fWidth << "\nrows=" << fHeight << "\n:\n";
-	//
-	//  The image needs to be flipped vertically for ImageMagik
-	//
-	for (int row = fHeight - 1; row >= 0; row--)
-	{
-		const  uchar_t  *rowpixels = fPixels + (row * fWidth * 4);
-		for (int col = 0; col < fWidth; col++)
-		{
-			image << *rowpixels++;
-			image << *rowpixels++;
-			image << *rowpixels++;
-			image << *rowpixels++;
-		}
-	}
-	image.close();
-	// Use these commands on Linux to view images as they are generated
-	//sprintf( msgBuffer, "display %s\n", suffixName.asChar() );
-	//system(msgBuffer );
-#endif
 	return stat;
 }
-MStatus blastCmd::doIt(const MArgList& args)
-//
-// Description
-//     This method performs the action of the command.
-//
-{
+
+MStatus blastCmd::doIt(const MArgList& args) {
 	char msgBuffer[256];
-	MStatus stat = MS::kFailure;    // Status code
+	MStatus stat = MS::kFailure;
 	stat = parseArgs(args);
-	if (!stat)
-	{
+	if (!stat) {
 		sprintf(msgBuffer, "Failed to parse args for %s command\n", commandName);
 		MGlobal::displayError(msgBuffer);
 		return stat;
 	}
-	// Find then current 3dView.
-	//
+
+	// change this to support oculus 2 views at once?
 	M3dView view = M3dView::active3dView();
-	// Set up the dimensions
-	// 
+
+	// this can change - see resizing M3dView
 	fWidth = (short)view.portWidth();
 	fHeight = (short)view.portHeight();
 	fPixelCnt = fWidth * fHeight;
-	// Allocate a block of memory to hold the images, 4 per pixel (RGBA)
-	//
+
+	// allocate
 	fPixels = new uchar_t[fPixelCnt * 4];
-	// Make sure that we actually got the memory
-	//
-	if (!fPixels)
-	{
+
+	// check allocation
+	if (!fPixels) {
 		MGlobal::displayError("Failed to allocate memory for reading pixels\n");
 		return MS::kFailure;
 	}
-	if (!onscreen)
-	{
-		// Create an MPxGLBuffer so that we can capture the 
-		// screen render into a frame buffer object. 
-		//
+
+	if (!onscreen) {
 		offBuff = new MyMPxGlBuffer(view);
-		// We must always supply the view that we will be rendering
-		// into an offscreen frame buffer. 
-		//
 		if (!offBuff->openFbo(fWidth, fHeight, view))
 		{
-			// The buffer failed to open.  Tell the user about it.
-			//
 			MGlobal::displayError("Failed to open offscreen buffer\n");
-			// Delete the off-screen buffer and set the pointer to NULL
-			// so it does not get deleted again.
-			//
 			delete offBuff;
 			offBuff = NULL;
 			return MS::kFailure;
 		}
 	}
-	for (MTime curTime = start; curTime <= end; curTime++)
-	{
-		MAnimControl::setCurrentTime(curTime);
-		if (!onscreen)
-		{
-			//  Refresh the view to the off-screen buffer.  The arguments
-			//  "all" and "force" to the normal refresh call are
-			//  unnecessary because the refresh is always forced and is
-			//  never to more than this single view.
-			//
-			view.refresh(*offBuff, true);
-			offBuff->bindFbo();
-		}
-		else
-		{
-			// We are not using an off-screen buffer.  Simply refresh
-			// the on-screen window.
 
-			view.refresh(false /* all */, true /* force */);
-			glReadBuffer(GL_FRONT);
-		}
-
-		// Tell the view that we want to use raw OpenGL calls ...
-		//
-		view.beginGL();
-		// ... read the pixels ...
-		//
-		glPixelStorei(GL_PACK_ALIGNMENT, 1);
-		glReadPixels(0, 0, fWidth, fHeight, GL_RGBA, GL_UNSIGNED_BYTE, fPixels);
-		// ... and tell the view that we are done with raw OpenGL.
-		view.endGL();
-		if (offBuff) {
-			offBuff->unbindFbo();
-		}
-		// Output the pixels to disk    
-		fileDump(curTime);
+	MAnimControl::setCurrentTime(start);
+	if (!onscreen) {
+		//  Refresh the view to the off-screen buffer.  The arguments
+		//  "all" and "force" to the normal refresh call are
+		//  unnecessary because the refresh is always forced and is
+		//  never to more than this single view.
+		view.refresh(*offBuff, true);
+		offBuff->bindFbo();
+	} else {
+		// We are not using an off-screen buffer.  Simply refresh
+		// the on-screen window.
+		view.refresh(false /* all */, true /* force */);
+		glReadBuffer(GL_FRONT);
 	}
-	// Free up our allocated memory.
-	//
+
+	view.beginGL();
+	glPixelStorei(GL_PACK_ALIGNMENT, 1);
+	glReadPixels(0, 0, fWidth, fHeight, GL_RGBA, GL_UNSIGNED_BYTE, fPixels);
+	view.endGL();
+
+	if (offBuff) {
+		offBuff->unbindFbo();
+	}
+
+	// Output the pixels to disk    
+	fileDump(curTime);
+
+	// deallocate
+
 	if (offBuff) {
 		offBuff->closeFbo(view);
 		delete offBuff;
 		offBuff = NULL;
 	}
+
 	delete[] fPixels;
 	return stat;
 }
-//
-// The following routines are used to register/unregister
-// the command we are creating within Maya
-//
-MStatus initializePlugin(MObject obj)
-{
-	MStatus   status;
-	MFnPlugin plugin(obj, PLUGIN_COMPANY, "6.0", "Any");
+
+#pragma mark Plugin Initialization
+
+MStatus initializePlugin(MObject obj) {
+	MStatus status;
+	MFnPlugin plugin(obj, CREATOR, "6.0", "Any");
 	status = plugin.registerCommand(commandName,
 		blastCmd::creator,
 		blastCmd::newSyntax);
@@ -291,9 +185,9 @@ MStatus initializePlugin(MObject obj)
 	}
 	return status;
 }
-MStatus uninitializePlugin(MObject obj)
-{
-	MStatus   status;
+
+MStatus uninitializePlugin(MObject obj) {
+	MStatus status;
 	MFnPlugin plugin(obj);
 	status = plugin.deregisterCommand(commandName);
 	if (!status) {

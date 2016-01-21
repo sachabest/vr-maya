@@ -17,19 +17,18 @@
 #include <maya/MImage.h>
 #include <maya/MIOStream.h>
 
-// Use this to choose between Linux MIFF files and Maya's standard IFF format for output
-#define OUTPUT_IFF_FILES
+// for GL pixels
 typedef unsigned char uchar_t;
+
 #define kOnscreenFlag       "-o"
 #define kOnscreenFlagLong   "-onscreen"
 #define kFilenameFlag       "-f"
 #define kFilenameFlagLong   "-filename"
-#define kStartFlag          "-s"
-#define kStartFlagLong      "-start"
-#define kEndFlag            "-e"
-#define kEndFlagLong        "-stop"
 #define commandName         "blast"
-// Offscreen buffer
+#define CREATOR 			"Sacha Best"
+
+#pragma mark GLBuffer Definition
+
 class MyMPxGlBuffer : public MPxGlBuffer {
 public:
 	MyMPxGlBuffer(M3dView &view);
@@ -39,24 +38,21 @@ public:
 	virtual void endBufferNotify();
 };
 
-//
-// Command class declaration
-//
-class blastCmd : public MPxCommand
-{
+#pragma mark Command Definition
+
+class blastCmd : public MPxCommand {
 public:
 	blastCmd();
 	virtual         ~blastCmd();
 	MStatus         doIt(const MArgList& args);
 	static MSyntax  newSyntax();
-	static void*    creator();
+	static void     *creator();
 private:
 	MStatus         fileDump(MTime);
 	MStatus         parseArgs(const MArgList& args);
 	bool            onscreen;
 	MString         filename;
 	MTime           start;
-	MTime           end;
 	MyMPxGlBuffer   *offBuff;
 	short           fHeight;
 	short           fWidth;
