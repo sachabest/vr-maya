@@ -1,4 +1,5 @@
 SUBDIRS := $(wildcard */.)  # e.g. "foo/. bar/."
+SUBDIRS := $(filter-out $(wildcard *.ios/.), $(SUBDIRS))
 TARGETS := all clean  # whatever else, but must not contain '/'
 
 # foo/.all bar/.all foo/.clean bar/.clean

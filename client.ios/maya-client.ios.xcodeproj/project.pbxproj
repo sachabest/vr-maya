@@ -1,0 +1,419 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 46;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		19876C461C516B04009E2A4C /* FrameServer.m in Sources */ = {isa = PBXBuildFile; fileRef = 19876C451C516B04009E2A4C /* FrameServer.m */; };
+		19961D711C5165A100552EC5 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 19961D701C5165A100552EC5 /* main.m */; };
+		19961D741C5165A100552EC5 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 19961D731C5165A100552EC5 /* AppDelegate.m */; };
+		19961D771C5165A100552EC5 /* MainViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 19961D761C5165A100552EC5 /* MainViewController.m */; };
+		19961D7A1C5165A100552EC5 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 19961D781C5165A100552EC5 /* Main.storyboard */; };
+		19961D7C1C5165A100552EC5 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 19961D7B1C5165A100552EC5 /* Assets.xcassets */; };
+		19961D7F1C5165A100552EC5 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 19961D7D1C5165A100552EC5 /* LaunchScreen.storyboard */; };
+		5DFA0BEF6F85DB7DEBF7F16A /* libPods-maya-client.ios.a in Frameworks */ = {isa = PBXBuildFile; fileRef = D33747B0C2B0C9D0469FDF11 /* libPods-maya-client.ios.a */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXFileReference section */
+		19876C441C516B04009E2A4C /* FrameServer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FrameServer.h; sourceTree = "<group>"; };
+		19876C451C516B04009E2A4C /* FrameServer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FrameServer.m; sourceTree = "<group>"; };
+		19961D6C1C5165A100552EC5 /* maya-client.ios.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "maya-client.ios.app"; sourceTree = BUILT_PRODUCTS_DIR; };
+		19961D701C5165A100552EC5 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
+		19961D721C5165A100552EC5 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
+		19961D731C5165A100552EC5 /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
+		19961D751C5165A100552EC5 /* MainViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MainViewController.h; sourceTree = "<group>"; };
+		19961D761C5165A100552EC5 /* MainViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = MainViewController.m; sourceTree = "<group>"; };
+		19961D791C5165A100552EC5 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
+		19961D7B1C5165A100552EC5 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		19961D7E1C5165A100552EC5 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
+		19961D801C5165A100552EC5 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		5535C9A9192641429B4D835D /* Pods-maya-client.ios.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-maya-client.ios.release.xcconfig"; path = "Pods/Target Support Files/Pods-maya-client.ios/Pods-maya-client.ios.release.xcconfig"; sourceTree = "<group>"; };
+		D33747B0C2B0C9D0469FDF11 /* libPods-maya-client.ios.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-maya-client.ios.a"; sourceTree = BUILT_PRODUCTS_DIR; };
+		F459A904068BD38E2DCFB8CA /* Pods-maya-client.ios.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-maya-client.ios.debug.xcconfig"; path = "Pods/Target Support Files/Pods-maya-client.ios/Pods-maya-client.ios.debug.xcconfig"; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		19961D691C5165A100552EC5 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				5DFA0BEF6F85DB7DEBF7F16A /* libPods-maya-client.ios.a in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		19876C411C516A87009E2A4C /* ViewControllers */ = {
+			isa = PBXGroup;
+			children = (
+				19961D751C5165A100552EC5 /* MainViewController.h */,
+				19961D761C5165A100552EC5 /* MainViewController.m */,
+			);
+			name = ViewControllers;
+			sourceTree = "<group>";
+		};
+		19876C421C516A95009E2A4C /* Models */ = {
+			isa = PBXGroup;
+			children = (
+				19876C441C516B04009E2A4C /* FrameServer.h */,
+				19876C451C516B04009E2A4C /* FrameServer.m */,
+			);
+			name = Models;
+			sourceTree = "<group>";
+		};
+		19876C431C516AA1009E2A4C /* Views */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = Views;
+			sourceTree = "<group>";
+		};
+		19961D631C5165A100552EC5 = {
+			isa = PBXGroup;
+			children = (
+				19961D6E1C5165A100552EC5 /* maya-client.ios */,
+				19961D6D1C5165A100552EC5 /* Products */,
+				9E5010D4E9F8F87D39E7368B /* Pods */,
+				C9AEF304E1BED9A29654E46B /* Frameworks */,
+			);
+			sourceTree = "<group>";
+		};
+		19961D6D1C5165A100552EC5 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				19961D6C1C5165A100552EC5 /* maya-client.ios.app */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		19961D6E1C5165A100552EC5 /* maya-client.ios */ = {
+			isa = PBXGroup;
+			children = (
+				19876C431C516AA1009E2A4C /* Views */,
+				19876C421C516A95009E2A4C /* Models */,
+				19876C411C516A87009E2A4C /* ViewControllers */,
+				19961D721C5165A100552EC5 /* AppDelegate.h */,
+				19961D731C5165A100552EC5 /* AppDelegate.m */,
+				19961D781C5165A100552EC5 /* Main.storyboard */,
+				19961D7B1C5165A100552EC5 /* Assets.xcassets */,
+				19961D7D1C5165A100552EC5 /* LaunchScreen.storyboard */,
+				19961D801C5165A100552EC5 /* Info.plist */,
+				19961D6F1C5165A100552EC5 /* Supporting Files */,
+			);
+			name = "maya-client.ios";
+			path = client.ios;
+			sourceTree = "<group>";
+		};
+		19961D6F1C5165A100552EC5 /* Supporting Files */ = {
+			isa = PBXGroup;
+			children = (
+				19961D701C5165A100552EC5 /* main.m */,
+			);
+			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		9E5010D4E9F8F87D39E7368B /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				F459A904068BD38E2DCFB8CA /* Pods-maya-client.ios.debug.xcconfig */,
+				5535C9A9192641429B4D835D /* Pods-maya-client.ios.release.xcconfig */,
+			);
+			name = Pods;
+			sourceTree = "<group>";
+		};
+		C9AEF304E1BED9A29654E46B /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				D33747B0C2B0C9D0469FDF11 /* libPods-maya-client.ios.a */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		19961D6B1C5165A100552EC5 /* maya-client.ios */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 19961D831C5165A100552EC5 /* Build configuration list for PBXNativeTarget "maya-client.ios" */;
+			buildPhases = (
+				E7D1A6AF45118E5781435893 /* Check Pods Manifest.lock */,
+				19961D681C5165A100552EC5 /* Sources */,
+				19961D691C5165A100552EC5 /* Frameworks */,
+				19961D6A1C5165A100552EC5 /* Resources */,
+				DDCFFF83C6B7B332A3CE1FCC /* Embed Pods Frameworks */,
+				D53E92C1E94E0A96D6CDD2F8 /* Copy Pods Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = "maya-client.ios";
+			productName = client.ios;
+			productReference = 19961D6C1C5165A100552EC5 /* maya-client.ios.app */;
+			productType = "com.apple.product-type.application";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		19961D641C5165A100552EC5 /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				LastUpgradeCheck = 0710;
+				ORGANIZATIONNAME = "Sacha Best";
+				TargetAttributes = {
+					19961D6B1C5165A100552EC5 = {
+						CreatedOnToolsVersion = 7.1.1;
+						DevelopmentTeam = Q4N479MPW3;
+					};
+				};
+			};
+			buildConfigurationList = 19961D671C5165A100552EC5 /* Build configuration list for PBXProject "maya-client.ios" */;
+			compatibilityVersion = "Xcode 3.2";
+			developmentRegion = English;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+				Base,
+			);
+			mainGroup = 19961D631C5165A100552EC5;
+			productRefGroup = 19961D6D1C5165A100552EC5 /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				19961D6B1C5165A100552EC5 /* maya-client.ios */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		19961D6A1C5165A100552EC5 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				19961D7F1C5165A100552EC5 /* LaunchScreen.storyboard in Resources */,
+				19961D7C1C5165A100552EC5 /* Assets.xcassets in Resources */,
+				19961D7A1C5165A100552EC5 /* Main.storyboard in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXShellScriptBuildPhase section */
+		D53E92C1E94E0A96D6CDD2F8 /* Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "Copy Pods Resources";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-maya-client.ios/Pods-maya-client.ios-resources.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		DDCFFF83C6B7B332A3CE1FCC /* Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "Embed Pods Frameworks";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-maya-client.ios/Pods-maya-client.ios-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		E7D1A6AF45118E5781435893 /* Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "Check Pods Manifest.lock";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [[ $? != 0 ]] ; then\n    cat << EOM\nerror: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\nEOM\n    exit 1\nfi\n";
+			showEnvVarsInLog = 0;
+		};
+/* End PBXShellScriptBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		19961D681C5165A100552EC5 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				19961D771C5165A100552EC5 /* MainViewController.m in Sources */,
+				19961D741C5165A100552EC5 /* AppDelegate.m in Sources */,
+				19876C461C516B04009E2A4C /* FrameServer.m in Sources */,
+				19961D711C5165A100552EC5 /* main.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXVariantGroup section */
+		19961D781C5165A100552EC5 /* Main.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				19961D791C5165A100552EC5 /* Base */,
+			);
+			name = Main.storyboard;
+			sourceTree = "<group>";
+		};
+		19961D7D1C5165A100552EC5 /* LaunchScreen.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				19961D7E1C5165A100552EC5 /* Base */,
+			);
+			name = LaunchScreen.storyboard;
+			sourceTree = "<group>";
+		};
+/* End PBXVariantGroup section */
+
+/* Begin XCBuildConfiguration section */
+		19961D811C5165A100552EC5 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.1;
+				MTL_ENABLE_DEBUG_INFO = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = iphoneos;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Debug;
+		};
+		19961D821C5165A100552EC5 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.1;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				SDKROOT = iphoneos;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
+		19961D841C5165A100552EC5 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = F459A904068BD38E2DCFB8CA /* Pods-maya-client.ios.debug.xcconfig */;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				INFOPLIST_FILE = client.ios/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = "com.sachabest.maya-client-ios";
+				PRODUCT_NAME = "maya-client.ios";
+			};
+			name = Debug;
+		};
+		19961D851C5165A100552EC5 /* Release */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 5535C9A9192641429B4D835D /* Pods-maya-client.ios.release.xcconfig */;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				INFOPLIST_FILE = client.ios/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = "com.sachabest.maya-client-ios";
+				PRODUCT_NAME = "maya-client.ios";
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		19961D671C5165A100552EC5 /* Build configuration list for PBXProject "maya-client.ios" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				19961D811C5165A100552EC5 /* Debug */,
+				19961D821C5165A100552EC5 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		19961D831C5165A100552EC5 /* Build configuration list for PBXNativeTarget "maya-client.ios" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				19961D841C5165A100552EC5 /* Debug */,
+				19961D851C5165A100552EC5 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = 19961D641C5165A100552EC5 /* Project object */;
+}
