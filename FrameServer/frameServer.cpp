@@ -1,7 +1,6 @@
 #include <iostream>
 
-#include <maya/MSimple.h>
-#include <maya/MIOStream.h>
+#include "frameServer.h"
 
 DeclareSimpleCommand(HelloWorld, "Autodesk", "2016");
 
