@@ -10,6 +10,7 @@ class FrameServer(QtCore.QThread):
 	should_terminate = False
 
 	def __init__(self, destination, filenames):
+		self.daemon = True
 		self.sock = socket.socket(socket.AF_INET, socket.SOCK_DGRAM)
 		self.destination = destination
 		self.filenames = filefilenamnames
@@ -26,7 +27,7 @@ class FrameServer(QtCore.QThread):
 
 	def run(self):
 		while not self.should_terminate:
-			send()
+			self.send()
 
 	def quit(self):
 		self.should_terminate = True

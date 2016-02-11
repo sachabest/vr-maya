@@ -1,9 +1,96 @@
 # -*- coding: utf-8 -*-
 
-# Form implementation generated from reading ui file '/Users/sachabest/Documents/gits/cis099/MayaApp/mainwindow.ui'
+# Form implementation generated from reading ui file 'mainwindow.ui'
 #
-# Created: Sat Feb  6 23:30:48 2016
-#      by: pyside-uic 0.2.14 running on PySide 1.2.0
+# Created: Mon Feb  8 10:47:12 2016
+#      by: pyside-uic 0.2.15 running on PySide 1.2.2
 #
 # WARNING! All changes made in this file will be lost!
+
+from PySide import QtCore, QtGui
+
+class Ui_MainWindow(object):
+    def setupUi(self, MainWindow):
+        MainWindow.setObjectName("MainWindow")
+        MainWindow.resize(800, 600)
+        self.centralwidget = QtGui.QWidget(MainWindow)
+        self.centralwidget.setObjectName("centralwidget")
+        self.verticalLayout_2 = QtGui.QVBoxLayout(self.centralwidget)
+        self.verticalLayout_2.setObjectName("verticalLayout_2")
+        self.verticalLayout = QtGui.QVBoxLayout()
+        self.verticalLayout.setObjectName("verticalLayout")
+        self.label = QtGui.QLabel(self.centralwidget)
+        self.label.setObjectName("label")
+        self.verticalLayout.addWidget(self.label)
+        self.horizontalLayout = QtGui.QHBoxLayout()
+        self.horizontalLayout.setObjectName("horizontalLayout")
+        self.console = QtGui.QTextEdit(self.centralwidget)
+        self.console.setObjectName("console")
+        self.horizontalLayout.addWidget(self.console)
+        self.verticalLayout_3 = QtGui.QVBoxLayout()
+        self.verticalLayout_3.setObjectName("verticalLayout_3")
+        self.graphics_1 = QtGui.QGraphicsView(self.centralwidget)
+        self.graphics_1.setObjectName("graphics_1")
+        self.verticalLayout_3.addWidget(self.graphics_1)
+        self.horizontalLayout_4 = QtGui.QHBoxLayout()
+        self.horizontalLayout_4.setObjectName("horizontalLayout_4")
+        self.filename_1 = QtGui.QLineEdit(self.centralwidget)
+        self.filename_1.setObjectName("filename_1")
+        self.horizontalLayout_4.addWidget(self.filename_1)
+        self.button_filename_1 = QtGui.QPushButton(self.centralwidget)
+        self.button_filename_1.setObjectName("button_filename_1")
+        self.horizontalLayout_4.addWidget(self.button_filename_1)
+        self.verticalLayout_3.addLayout(self.horizontalLayout_4)
+        self.graphics_2 = QtGui.QGraphicsView(self.centralwidget)
+        self.graphics_2.setObjectName("graphics_2")
+        self.verticalLayout_3.addWidget(self.graphics_2)
+        self.horizontalLayout_5 = QtGui.QHBoxLayout()
+        self.horizontalLayout_5.setObjectName("horizontalLayout_5")
+        self.filename_2 = QtGui.QLineEdit(self.centralwidget)
+        self.filename_2.setObjectName("filename_2")
+        self.horizontalLayout_5.addWidget(self.filename_2)
+        self.button_filename_2 = QtGui.QPushButton(self.centralwidget)
+        self.button_filename_2.setObjectName("button_filename_2")
+        self.horizontalLayout_5.addWidget(self.button_filename_2)
+        self.verticalLayout_3.addLayout(self.horizontalLayout_5)
+        self.horizontalLayout.addLayout(self.verticalLayout_3)
+        self.verticalLayout.addLayout(self.horizontalLayout)
+        self.verticalLayout_2.addLayout(self.verticalLayout)
+        self.horizontalLayout_3 = QtGui.QHBoxLayout()
+        self.horizontalLayout_3.setObjectName("horizontalLayout_3")
+        self.button_start = QtGui.QPushButton(self.centralwidget)
+        self.button_start.setObjectName("button_start")
+        self.horizontalLayout_3.addWidget(self.button_start)
+        spacerItem = QtGui.QSpacerItem(40, 20, QtGui.QSizePolicy.Expanding, QtGui.QSizePolicy.Minimum)
+        self.horizontalLayout_3.addItem(spacerItem)
+        self.verticalLayout_2.addLayout(self.horizontalLayout_3)
+        self.horizontalLayout_2 = QtGui.QHBoxLayout()
+        self.horizontalLayout_2.setObjectName("horizontalLayout_2")
+        self.label_client_header = QtGui.QLabel(self.centralwidget)
+        self.label_client_header.setObjectName("label_client_header")
+        self.horizontalLayout_2.addWidget(self.label_client_header)
+        self.label_client = QtGui.QLabel(self.centralwidget)
+        self.label_client.setObjectName("label_client")
+        self.horizontalLayout_2.addWidget(self.label_client)
+        self.verticalLayout_2.addLayout(self.horizontalLayout_2)
+        MainWindow.setCentralWidget(self.centralwidget)
+        self.menubar = QtGui.QMenuBar()
+        self.menubar.setGeometry(QtCore.QRect(0, 0, 800, 22))
+        self.menubar.setObjectName("menubar")
+        MainWindow.setMenuBar(self.menubar)
+        self.statusbar = QtGui.QStatusBar(MainWindow)
+        self.statusbar.setObjectName("statusbar")
+        MainWindow.setStatusBar(self.statusbar)
+
+        self.retranslateUi(MainWindow)
+        QtCore.QMetaObject.connectSlotsByName(MainWindow)
+
+    def retranslateUi(self, MainWindow):
+        MainWindow.setWindowTitle(QtGui.QApplication.translate("MainWindow", "MainWindow", None, QtGui.QApplication.UnicodeUTF8))
+        self.label.setText(QtGui.QApplication.translate("MainWindow", "Maya VR", None, QtGui.QApplication.UnicodeUTF8))
+        self.button_filename_1.setText(QtGui.QApplication.translate("MainWindow", "Browse", None, QtGui.QApplication.UnicodeUTF8))
+        self.button_filename_2.setText(QtGui.QApplication.translate("MainWindow", "Browse", None, QtGui.QApplication.UnicodeUTF8))
+        self.button_start.setText(QtGui.QApplication.translate("MainWindow", "Start Server", None, QtGui.QApplication.UnicodeUTF8))
+        self.label_client_header.setText(QtGui.QApplication.translate("MainWindow", "TextLabel", None, QtGui.QApplication.UnicodeUTF8))
+        self.label_client.setText(QtGui.QApplication.translate("MainWindow", "TextLabel", None, QtGui.QApplication.UnicodeUTF8))
 
