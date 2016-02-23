@@ -17,8 +17,8 @@ class FrameServer(QtCore.QThread):
 		self.filenames = filenames
 
 	def send(self):
-		cmds.blast(filename=self.filenames(0))
-		cmds.blas(filename=self.filenames(1))
+		cmds.iBlast(filename=self.filenames[0])
+		cmds.iBlast(filename=self.filenames[1])
 		with open(self.filenames(0), 'r') as f:
 			data = f.read()
 			sock.sendto(data + '\n', self.destination)

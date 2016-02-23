@@ -15,8 +15,8 @@ class MainWindow(QMainWindow):
 	server = None
 	registration_server = None
 	client = None
-	filename_1 = "~/eye1.jpg"
-	filename_2 = "~/eye2.jpg"
+	filename_1 = PROJECT_DIR + "/eye1.jpg"
+	filename_2 = PROJECT_DIR + "/eye2.jpg"
 	on = False
 
 	def __init__(self, parent=None):

@@ -24,7 +24,7 @@ typedef unsigned char uchar_t;
 #define kOnscreenFlagLong   "-onscreen"
 #define kFilenameFlag       "-f"
 #define kFilenameFlagLong   "-filename"
-#define commandName         "blast"
+#define commandName         "iBlast"
 #define CREATOR 			"Sacha Best"
 
 #pragma mark GLBuffer Definition
@@ -40,10 +40,10 @@ public:
 
 #pragma mark Command Definition
 
-class blastCmd : public MPxCommand {
+class iBlastCmd : public MPxCommand {
 public:
-	blastCmd();
-	virtual         ~blastCmd();
+	iBlastCmd();
+	virtual         ~iBlastCmd();
 	MStatus         doIt(const MArgList& args);
 	static MSyntax  newSyntax();
 	static void     *creator();

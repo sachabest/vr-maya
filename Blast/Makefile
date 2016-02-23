@@ -37,7 +37,7 @@ DSTDIR := $(TOP)/Blast
 
 Blast_SOURCES  := $(TOP)/Blast/blast.cpp
 Blast_OBJECTS  := $(TOP)/Blast/blast.o
-Blast_PLUGIN   := $(DSTDIR)/blast.$(EXT)
+Blast_PLUGIN   := $(DSTDIR)/iBlast.$(EXT)
 Blast_MAKEFILE := $(DSTDIR)/Makefile
 
 #

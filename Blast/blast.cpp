@@ -1,4 +1,4 @@
-// Referenced from blastCmd.cpp (Copyright 2015 Autodesk)
+// Referenced from iBlastCmd.cpp (Copyright 2015 Autodesk)
 
 #include "blast.h"
 
@@ -16,28 +16,28 @@ void MyMPxGlBuffer::endBufferNotify() {}
 
 #pragma mark Creation and Destruction
 
-blastCmd::blastCmd() {
+iBlastCmd::iBlastCmd() {
 	offBuff = NULL;
 }
 
-blastCmd::~blastCmd() {
+iBlastCmd::~iBlastCmd() {
 	delete offBuff;
 }
 
-void *blastCmd::creator() {
-	return (void *)(new blastCmd);
+void *iBlastCmd::creator() {
+	return (void *)(new iBlastCmd);
 }
 
 #pragma mark Argument Handling
 
-MSyntax blastCmd::newSyntax() {
+MSyntax iBlastCmd::newSyntax() {
 	MSyntax syntax;
 	syntax.addFlag(kOnscreenFlag, kOnscreenFlagLong);
 	syntax.addFlag(kFilenameFlag, kFilenameFlagLong, MSyntax::kString);
 	return syntax;
 }
 
-MStatus blastCmd::parseArgs(const MArgList& args) {
+MStatus iBlastCmd::parseArgs(const MArgList& args) {
 	MStatus stat = MS::kSuccess;
 	MArgDatabase argData(syntax(), args);
 	onscreen = argData.isFlagSet(kOnscreenFlag);
@@ -50,7 +50,7 @@ MStatus blastCmd::parseArgs(const MArgList& args) {
 	return stat;
 }
 
-MStatus blastCmd::fileDump(MTime frame) {
+MStatus iBlastCmd::fileDump(MTime frame) {
 	MStatus stat = MS::kFailure;
 
 	char msgBuffer[256]; // to save xostly stdout calls
@@ -79,7 +79,7 @@ MStatus blastCmd::fileDump(MTime frame) {
 		iffPixels++;
 	};
 
-	if (iffOutput.writeToFile(filename + '.jpg') != MS::kSuccess) {
+	if (iffOutput.writeToFile(filename + '.jpg', MString("jpg")) != MS::kSuccess) {
 		sprintf(msgBuffer, "Failed to output image to %s\n", filename.asChar());
 		MGlobal::displayError(msgBuffer);
 		stat = MS::kFailure;
@@ -94,7 +94,7 @@ MStatus blastCmd::fileDump(MTime frame) {
 	return stat;
 }
 
-MStatus blastCmd::doIt(const MArgList& args) {
+MStatus iBlastCmd::doIt(const MArgList& args) {
 	char msgBuffer[256];
 	MStatus stat = MS::kFailure;
 	stat = parseArgs(args);
@@ -177,8 +177,8 @@ MStatus initializePlugin(MObject obj) {
 	MStatus status;
 	MFnPlugin plugin(obj, CREATOR, "6.0", "Any");
 	status = plugin.registerCommand(commandName,
-		blastCmd::creator,
-		blastCmd::newSyntax);
+		iBlastCmd::creator,
+		iBlastCmd::newSyntax);
 	if (!status) {
 		status.perror("registerCommand");
 		return status;
