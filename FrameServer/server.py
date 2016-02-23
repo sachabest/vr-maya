@@ -10,10 +10,11 @@ class FrameServer(QtCore.QThread):
 	should_terminate = False
 
 	def __init__(self, destination, filenames):
+		QtCore.QThread.__init__(self)
 		self.daemon = True
 		self.sock = socket.socket(socket.AF_INET, socket.SOCK_DGRAM)
 		self.destination = destination
-		self.filenames = filefilenamnames
+		self.filenames = filenames
 
 	def send(self):
 		cmds.blast(filename=self.filenames(0))

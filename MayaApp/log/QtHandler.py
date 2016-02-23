@@ -1,5 +1,5 @@
 import logging
-
+from XStream import XStream
 class QtHandler(logging.Handler):
     def __init__(self):
         logging.Handler.__init__(self)
