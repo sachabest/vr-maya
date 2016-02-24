@@ -50,10 +50,10 @@ class MainWindow(QMainWindow):
 
 	def registered_client(self, client):
 		self.client = client
-		logger.info("Registered: " + client)
+		logger.info("Registered: " + client[0] + ":" + str(client[1]))
 
 	def bad_register_client(self, client):
-		self.write_error_text("Couldn't register: " + client(0) + ":" + str(client(1)))
+		logger.error("Couldn't register: " + client(0) + ":" + str(client(1)))
 
 	def write_error_text(self, text):
 		self.ui.console.setTextColor(COLOR_ERROR)
@@ -89,6 +89,7 @@ class MainWindow(QMainWindow):
 				# cannot start the server without a client
 				self.server.start()
 				logger.info("Server started.")
+				logger.info("Sending frames to " + self.client)
 				self.on = True
 		else:
 			self.server.quit()

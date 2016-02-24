@@ -1,13 +1,14 @@
 import SocketServer, sys, logging
 from maya import cmds
 from PySide.QtCore import *
+from MayaApp.log.Log import *
 
 HOST = "localhost"
 PORT = 9999
 
 class ServerWrapper(QObject):
-    registered = Signal(str)
-    bad_registration = Signal(str)
+    registered = Signal(list)
+    bad_registration = Signal(list)
     server = None
         
     def __init__(self, binding, handler):
@@ -22,10 +23,10 @@ class MyTCPHandler(SocketServer.BaseRequestHandler):
 
     def handle(self):
         # self.request is the TCP socket connected to the client
-        self.data = self.request.recv(1024).strip()
+        self.data = int(self.request.recv(1024).strip())
         if not self.in_use:
             self.client = self.client_address
-            self.server.wrapper.registered.emit(self.client)
+            self.server.wrapper.registered.emit((self.client[0], self.data))
             self.request.sendall("ok")
         else:
             self.server.wrapper.bad_registration.emit(self.client_address)

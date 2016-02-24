@@ -19,3 +19,8 @@ if PROJECT_DIR not in sys.path:
 if PIP_ROOT not in sys.path:
 	sys.path.insert(0, PIP_ROOT)
 	print "Path to pip files added to sys.path"
+
+import RegistrationServer.server
+reload(RegistrationServer.server)
+import FrameServer.server
+reload(FrameServer.server)
