@@ -79,7 +79,7 @@ MStatus iBlastCmd::fileDump(MTime frame) {
 		iffPixels++;
 	};
 
-	if (iffOutput.writeToFile(filename + '.jpg', MString("jpg")) != MS::kSuccess) {
+	if (iffOutput.writeToFile(filename, "png") != MS::kSuccess) {
 		sprintf(msgBuffer, "Failed to output image to %s\n", filename.asChar());
 		MGlobal::displayError(msgBuffer);
 		stat = MS::kFailure;

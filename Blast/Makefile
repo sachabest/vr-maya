@@ -17,7 +17,7 @@ ifndef INCL_BUILDRULES
 # Include platform specific build settings
 #
 TOP := ..
-include $(TOP)/buildrules
+include $(TOP)/config_16/buildrules
 
 
 #
@@ -37,6 +37,8 @@ DSTDIR := $(TOP)/Blast
 
 Blast_SOURCES  := $(TOP)/Blast/blast.cpp
 Blast_OBJECTS  := $(TOP)/Blast/blast.o
+# Blast_SOURCES  := $(TOP)/Blast/blast.cpp
+# Blast_OBJECTS  := $(TOP)/Blast/blast.o
 Blast_PLUGIN   := $(DSTDIR)/iBlast.$(EXT)
 Blast_MAKEFILE := $(DSTDIR)/Makefile
 

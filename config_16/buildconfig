@@ -14,7 +14,7 @@ mayaVersion := 2016
 # If you have Maya installed in a non-standard location, uncomment the
 # following line and set the path to the 'Maya.app/Contents' directory of
 # your Maya installation:
-MAYA_LOCATION = /Applications/Autodesk/maya2016/Maya.app/Contents/
+# MAYA_LOCATION = /my/path/to/Maya.app/Contents
 export MAYA_LOCATION
 
 # Make sure these are in your path.

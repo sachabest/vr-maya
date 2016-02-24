@@ -13,7 +13,7 @@
 
 INCL_BUILDRULES := 1
 
-include $(TOP)/buildconfig
+include $(TOP)/config_14/buildconfig
 
 ##################
 # Generic Rules  #
@@ -52,8 +52,8 @@ all : plugins
 	$(CC) -c $(INCLUDES) $(CFLAGS) $< -o $@
 
 %.o :	%.cpp
-	$(CXX) -c $(INCLUDES) $(C++FLAGS) $< -o $@
+	$(C++) -c $(INCLUDES) $(C++FLAGS) $< -o $@
 
 %.i :	%.cpp
-	$(CXX) -E $(INCLUDES) $(C++FLAGS) $*.cpp > $*.i
+	$(C++) -E $(INCLUDES) $(C++FLAGS) $*.cpp > $*.i
 

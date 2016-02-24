@@ -1,6 +1,6 @@
 import socket, sys
 from PySide import QtCore, QtGui
-from maya import cmds
+from maya import cmds, utils
 
 class FrameServer(QtCore.QThread):
 
@@ -17,14 +17,14 @@ class FrameServer(QtCore.QThread):
 		self.filenames = filenames
 
 	def send(self):
-		cmds.iBlast(filename=self.filenames[0])
-		cmds.iBlast(filename=self.filenames[1])
-		with open(self.filenames(0), 'r') as f:
-			data = f.read()
-			sock.sendto(data + '\n', self.destination)
-		with open(self.filenames(1), 'r') as f:
-			data = f.read()
-			sock.sendto(data + '\n', self.destination)
+		self.blast_background()
+		self.quit()
+		# with open(self.filenames[0], 'r') as f:
+		# 	data = f.read()
+		# 	sock.sendto(data + '\n', self.destination)
+		# with open(self.filenames[1], 'r') as f:
+		# 	data = f.read()
+		# 	sock.sendto(data + '\n', self.destination)
 
 	def run(self):
 		while not self.should_terminate:
@@ -32,3 +32,10 @@ class FrameServer(QtCore.QThread):
 
 	def quit(self):
 		self.should_terminate = True
+
+	def blast_background(self):
+		utils.executeInMainThreadWithResult(self._blast_background_innter)
+
+	def _blast_background_innter(self):
+		cmds.iBlast(filename=self.filenames[0], onscreen=True)
+		cmds.iBlast(filename=self.filenames[1], onscreen=True)
