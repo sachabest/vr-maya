@@ -1,24 +1,34 @@
 # TCP Frame Tester
 
 HOST, PORT = "localhost", 10000
-MAX_IMAGE_SIZE = 1024 * 1024 * 2 # 2MB
+MAX_IMAGE_SIZE = 1024 * 1024 * 4 # 8MB
+OK_SIZE = 1024
+IMG_BUF = 8
 
-import SocketServer
+import sys, socket
 
-class MyTCPHandler(SocketServer.BaseRequestHandler):
+sock = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
+try:
+    # Connect to server and send data
+    print "Listening on %s:%d" % (HOST, PORT)
+    sock.bind((HOST, PORT))
+    sock.listen(10)
+    conn, addr = sock.accept()
+    print "Receiving from %s:%d" % addr
+    while True:
+        ## get size 
+        data = conn.recv(OK_SIZE).strip()
+        length = int(data)
+        print "Receiving " + str(length) +  " bytes"
+        conn.send("k\n")
+        print "Acknowledged"
 
-    def handle(self):
-        # self.request is the TCP socket connected to the client
-        self.data = self.request.recv(1024).strip()
-        print "{} wrote:".format(self.client_address[0])
-        print self.data
-        # just send back the same data, but upper-cased
-        self.request.sendall("k")
+        ## get frame
+        data = conn.recv(length + IMG_BUF).strip()
+        print "Received " + str(len(data)) +  " bytes"
+        conn.send("k\n")
+        print "Acknowledged"
 
-if __name__ == "__main__":
-    print 'Starting listen socket on ' + HOST + ":" + str(PORT)
-    server = SocketServer.TCPServer((HOST, PORT), MyTCPHandler)
-
-    # Activate the server; this will keep running until you
-    # interrupt the program with Ctrl-C
-    server.serve_forever()
+finally:
+    conn.close()
+    sock.close()

@@ -24,3 +24,5 @@ import RegistrationServer.server
 reload(RegistrationServer.server)
 import FrameServer.server
 reload(FrameServer.server)
+import MayaApp.log.Log
+reload(MayaApp.log.Log)

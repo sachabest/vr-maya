@@ -1,6 +1,7 @@
 import socket, sys
 from PySide import QtCore, QtGui
 from maya import cmds, utils
+from MayaApp.log.Log import *
 
 HOST = "localhost"
 PORT = 9998
@@ -21,15 +22,24 @@ class FrameServer(QtCore.QThread):
 		self.filenames = filenames
 
 	def send(self):
-		self.blast_background()
-		with open(self.filenames[0], 'r') as f:
+		self._blast_background_innter()
+		self.send_one_frame(self.filenames[0])
+		self.send_one_frame(self.filenames[1])
+
+
+	def send_one_frame(self, filename):
+		with open(filename, 'r') as f:
 			data = f.read()
-			self.sock.send(data + '\n')
-		self.sock.recv(8)
-		with open(self.filenames[1], 'r') as f:
-			data = f.read()
-			self.sock.send(data + '\n')
-		self.sock.recv(8)
+		self.sock.send(str(len(data)) + "\n")
+		rcv = self.sock.recv(24).strip()
+		if rcv != "k":
+			logger.error("Client didn't respond appropriately. Expecting: \"k\". Got: " + rcv);
+			self.quit();
+		self.sock.send(data)
+		rcv = self.sock.recv(24).strip()
+		if rcv != "k":
+			logger.error("Client didn't respond appropriately. Expecting: \"k\". Got: " + rcv);
+			self.quit();
 
 	def run(self):
 		while not self.should_terminate:
@@ -40,7 +50,7 @@ class FrameServer(QtCore.QThread):
 		self.should_terminate = True
 
 	def blast_background(self):
-		utils.executeInMainThreadWithResult(self._blast_background_innter)
+		utils.executeDeferred(self._blast_background_innter)
 
 	def _blast_background_innter(self):
 		cmds.iBlast(filename=self.filenames[0], onscreen=True)

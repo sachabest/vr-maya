@@ -33,6 +33,7 @@ class MainWindow(QMainWindow):
 		self.ui.button_start.clicked.connect(self.start_stop_server)
 		self.ui.filename_1.setText(self.filename_1)
 		self.ui.filename_2.setText(self.filename_2)
+		self.ui.console.setFontPointSize(16)
 
 	def start_registration_server(self):
 		self.registration_server.start()
@@ -48,12 +49,15 @@ class MainWindow(QMainWindow):
 			self.server = None
 			print "Killed Frame Server"
 
+	def get_client(self):
+		return self.client[0] + ":" + str(self.client[1])
+
 	def registered_client(self, client):
 		self.client = client
-		logger.info("Registered: " + client[0] + ":" + str(client[1]))
+		logger.info("Registered: " + self.get_client())
 
 	def bad_register_client(self, client):
-		logger.error("Couldn't register: " + client(0) + ":" + str(client(1)))
+		logger.error("Couldn't register: " + client[0] + ":" + str(client[1]))
 
 	def write_error_text(self, text):
 		self.ui.console.setTextColor(COLOR_ERROR)
@@ -89,7 +93,7 @@ class MainWindow(QMainWindow):
 				# cannot start the server without a client
 				self.server.start()
 				logger.info("Server started.")
-				logger.info("Sending frames to " + self.client)
+				logger.info("Sending frames to " + self.get_client())
 				self.on = True
 		else:
 			self.server.quit()
@@ -99,4 +103,4 @@ class MainWindow(QMainWindow):
 
 	def register_client(self, client):
 		self.client = client
-		logger.info("Registerd client at " + str(client(0)) + ":" + str(client(1)))
+		logger.info("Registerd client at " + self.get_client())
