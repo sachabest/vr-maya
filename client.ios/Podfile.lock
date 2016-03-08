@@ -1,10 +1,13 @@
 PODS:
   - CocoaAsyncSocket (7.4.2)
+  - M13ProgressSuite (1.2.7)
 
 DEPENDENCIES:
   - CocoaAsyncSocket
+  - M13ProgressSuite
 
 SPEC CHECKSUMS:
   CocoaAsyncSocket: f5783bdedd232d91b89769bc4b5a1580aed518ad
+  M13ProgressSuite: 03d194af6359da440641ba758aed5a18b0386a86
 
 COCOAPODS: 0.39.0

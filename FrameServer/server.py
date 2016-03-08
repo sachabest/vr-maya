@@ -22,7 +22,7 @@ class FrameServer(QtCore.QThread):
 		self.filenames = filenames
 
 	def send(self):
-		self._blast_background_innter()
+		self.blast_background()
 		self.send_one_frame(self.filenames[0])
 		self.send_one_frame(self.filenames[1])
 
@@ -31,12 +31,12 @@ class FrameServer(QtCore.QThread):
 		with open(filename, 'r') as f:
 			data = f.read()
 		self.sock.send(str(len(data)) + "\n")
-		rcv = self.sock.recv(24).strip()
+		rcv = self.sock.recv(1024).strip()
 		if rcv != "k":
 			logger.error("Client didn't respond appropriately. Expecting: \"k\". Got: " + rcv);
 			self.quit();
 		self.sock.send(data)
-		rcv = self.sock.recv(24).strip()
+		rcv = self.sock.recv(1024).strip()
 		if rcv != "k":
 			logger.error("Client didn't respond appropriately. Expecting: \"k\". Got: " + rcv);
 			self.quit();
@@ -50,8 +50,10 @@ class FrameServer(QtCore.QThread):
 		self.should_terminate = True
 
 	def blast_background(self):
-		utils.executeDeferred(self._blast_background_innter)
+		utils.executeInMainThreadWithResult(self._blast_background_inner)
 
-	def _blast_background_innter(self):
+	def _blast_background_inner(self):
 		cmds.iBlast(filename=self.filenames[0], onscreen=True)
+		self.usleep(50)
 		cmds.iBlast(filename=self.filenames[1], onscreen=True)
+		self.usleep(50)

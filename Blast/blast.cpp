@@ -84,10 +84,10 @@ MStatus iBlastCmd::fileDump(MTime frame) {
 		MGlobal::displayError(msgBuffer);
 		stat = MS::kFailure;
 	} else {
-		sprintf(msgBuffer, "output from %s buffer to %s done.\n",
-			(onscreen ? "on-screen" : "off-screen"),
-			filename.asChar());
-		MGlobal::displayInfo(msgBuffer);
+		// sprintf(msgBuffer, "output from %s buffer to %s done.\n",
+		// 	(onscreen ? "on-screen" : "off-screen"),
+		// 	filename.asChar());
+		// MGlobal::displayInfo(msgBuffer);
 		stat = MS::kSuccess;
 	}
 

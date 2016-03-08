@@ -1,3 +1,4 @@
+#!/usr/bin/python
 # TCP Tester
 
 import socket

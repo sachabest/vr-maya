@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="9060" systemVersion="15C50" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="BYZ-38-t0r">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="9532" systemVersion="15D21" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="BYZ-38-t0r">
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="9051"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="9530"/>
     </dependencies>
     <scenes>
         <!--Main View Controller-->
@@ -17,26 +17,52 @@
                         <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="oGq-zQ-a47">
-                                <rect key="frame" x="0.0" y="20" width="600" height="580"/>
-                                <animations/>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="Wfb-qc-e4n" userLabel="ImageView2">
+                                <rect key="frame" x="300" y="0.0" width="300" height="600"/>
+                                <color key="backgroundColor" red="0.0" green="1" blue="0.91805723323316624" alpha="1" colorSpace="calibratedRGB"/>
+                            </imageView>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="oGq-zQ-a47" userLabel="ImageView1">
+                                <rect key="frame" x="0.0" y="0.0" width="300" height="600"/>
+                                <color key="backgroundColor" red="0.0" green="1" blue="0.91805723319999999" alpha="1" colorSpace="calibratedRGB"/>
                             </imageView>
                         </subviews>
-                        <animations/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                         <constraints>
+                            <constraint firstItem="Wfb-qc-e4n" firstAttribute="top" secondItem="8bC-Xf-vdC" secondAttribute="top" id="5Gf-SB-bOl"/>
                             <constraint firstItem="oGq-zQ-a47" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leading" id="7PV-u9-p0e"/>
+                            <constraint firstItem="Wfb-qc-e4n" firstAttribute="top" secondItem="y3c-jy-aDJ" secondAttribute="bottom" id="8XG-hO-xwU"/>
                             <constraint firstItem="oGq-zQ-a47" firstAttribute="top" secondItem="y3c-jy-aDJ" secondAttribute="bottom" id="8lC-RC-ghs"/>
                             <constraint firstAttribute="trailing" secondItem="oGq-zQ-a47" secondAttribute="trailing" id="B4c-tK-taE"/>
+                            <constraint firstItem="wfy-db-euE" firstAttribute="top" secondItem="oGq-zQ-a47" secondAttribute="bottom" id="H6T-4A-N8V"/>
+                            <constraint firstItem="Wfb-qc-e4n" firstAttribute="width" secondItem="oGq-zQ-a47" secondAttribute="width" id="Ib0-Ii-etj"/>
+                            <constraint firstItem="wfy-db-euE" firstAttribute="top" secondItem="Wfb-qc-e4n" secondAttribute="bottom" id="MKK-HY-aK6"/>
+                            <constraint firstItem="oGq-zQ-a47" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leading" id="O9r-Ie-dCp"/>
+                            <constraint firstItem="Wfb-qc-e4n" firstAttribute="height" secondItem="oGq-zQ-a47" secondAttribute="height" id="VQk-jz-7Ow"/>
+                            <constraint firstItem="Wfb-qc-e4n" firstAttribute="leading" secondItem="oGq-zQ-a47" secondAttribute="trailing" id="ZyB-lX-h9C"/>
+                            <constraint firstItem="oGq-zQ-a47" firstAttribute="top" secondItem="8bC-Xf-vdC" secondAttribute="top" id="e4S-Jq-Ta4"/>
                             <constraint firstItem="wfy-db-euE" firstAttribute="top" secondItem="oGq-zQ-a47" secondAttribute="bottom" id="hI2-9N-JMm"/>
+                            <constraint firstAttribute="trailing" secondItem="Wfb-qc-e4n" secondAttribute="trailing" id="mrI-nA-LAV"/>
+                            <constraint firstItem="Wfb-qc-e4n" firstAttribute="top" secondItem="y3c-jy-aDJ" secondAttribute="bottom" id="sx4-95-cfH"/>
                         </constraints>
+                        <variation key="default">
+                            <mask key="constraints">
+                                <exclude reference="7PV-u9-p0e"/>
+                                <exclude reference="8lC-RC-ghs"/>
+                                <exclude reference="B4c-tK-taE"/>
+                                <exclude reference="8XG-hO-xwU"/>
+                                <exclude reference="sx4-95-cfH"/>
+                                <exclude reference="hI2-9N-JMm"/>
+                            </mask>
+                        </variation>
                     </view>
                     <connections>
-                        <outlet property="frameImageView" destination="oGq-zQ-a47" id="LsO-SR-JNj"/>
+                        <outlet property="imageView1" destination="oGq-zQ-a47" id="yo7-N5-XFR"/>
+                        <outlet property="imageView2" destination="Wfb-qc-e4n" id="7MH-DH-ypX"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
             </objects>
+            <point key="canvasLocation" x="305" y="387"/>
         </scene>
     </scenes>
 </document>

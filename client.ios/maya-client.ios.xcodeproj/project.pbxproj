@@ -8,6 +8,8 @@
 
 /* Begin PBXBuildFile section */
 		19876C461C516B04009E2A4C /* FrameServer.m in Sources */ = {isa = PBXBuildFile; fileRef = 19876C451C516B04009E2A4C /* FrameServer.m */; };
+		1992801C1C8E2C4D00027C1A /* RegistrationServer.m in Sources */ = {isa = PBXBuildFile; fileRef = 1992801B1C8E2C4D00027C1A /* RegistrationServer.m */; };
+		1992801F1C8E2DDE00027C1A /* IPManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 1992801E1C8E2DDE00027C1A /* IPManager.m */; };
 		19961D711C5165A100552EC5 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 19961D701C5165A100552EC5 /* main.m */; };
 		19961D741C5165A100552EC5 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 19961D731C5165A100552EC5 /* AppDelegate.m */; };
 		19961D771C5165A100552EC5 /* MainViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 19961D761C5165A100552EC5 /* MainViewController.m */; };
@@ -20,6 +22,10 @@
 /* Begin PBXFileReference section */
 		19876C441C516B04009E2A4C /* FrameServer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FrameServer.h; sourceTree = "<group>"; };
 		19876C451C516B04009E2A4C /* FrameServer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FrameServer.m; sourceTree = "<group>"; };
+		1992801A1C8E2C4D00027C1A /* RegistrationServer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RegistrationServer.h; sourceTree = "<group>"; };
+		1992801B1C8E2C4D00027C1A /* RegistrationServer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RegistrationServer.m; sourceTree = "<group>"; };
+		1992801D1C8E2DDE00027C1A /* IPManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IPManager.h; sourceTree = "<group>"; };
+		1992801E1C8E2DDE00027C1A /* IPManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = IPManager.m; sourceTree = "<group>"; };
 		19961D6C1C5165A100552EC5 /* maya-client.ios.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "maya-client.ios.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		19961D701C5165A100552EC5 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		19961D721C5165A100552EC5 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
@@ -61,6 +67,10 @@
 			children = (
 				19876C441C516B04009E2A4C /* FrameServer.h */,
 				19876C451C516B04009E2A4C /* FrameServer.m */,
+				1992801A1C8E2C4D00027C1A /* RegistrationServer.h */,
+				1992801B1C8E2C4D00027C1A /* RegistrationServer.m */,
+				1992801D1C8E2DDE00027C1A /* IPManager.h */,
+				1992801E1C8E2DDE00027C1A /* IPManager.m */,
 			);
 			name = Models;
 			sourceTree = "<group>";
@@ -255,7 +265,9 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				1992801F1C8E2DDE00027C1A /* IPManager.m in Sources */,
 				19961D771C5165A100552EC5 /* MainViewController.m in Sources */,
+				1992801C1C8E2C4D00027C1A /* RegistrationServer.m in Sources */,
 				19961D741C5165A100552EC5 /* AppDelegate.m in Sources */,
 				19876C461C516B04009E2A4C /* FrameServer.m in Sources */,
 				19961D711C5165A100552EC5 /* main.m in Sources */,

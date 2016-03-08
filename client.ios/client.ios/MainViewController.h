@@ -7,10 +7,15 @@
 //
 
 #import <UIKit/UIKit.h>
+#import <M13ProgressSuite/M13ProgressHUD.h>
+#import <M13ProgressSuite/M13ProgressViewRing.h>
 
-@interface MainViewController : UIViewController
+@interface MainViewController : UIViewController {
+    M13ProgressHUD *loadingHUD;
+}
 
-@property (weak, nonatomic) IBOutlet UIImageView *frameImageView;
+@property (weak, nonatomic) IBOutlet UIImageView *imageView1;
+@property (weak, nonatomic) IBOutlet UIImageView *imageView2;
 
 @end
 

@@ -1,3 +1,4 @@
+#!/usr/bin/python
 # TCP Frame Tester
 
 HOST, PORT = "localhost", 10000
