@@ -34,6 +34,7 @@ MSyntax iBlastCmd::newSyntax() {
 	MSyntax syntax;
 	syntax.addFlag(kOnscreenFlag, kOnscreenFlagLong);
 	syntax.addFlag(kFilenameFlag, kFilenameFlagLong, MSyntax::kString);
+	syntax.addFlag(kPanelFlag, kPanelFlagLong, MSyntax::kString);
 	return syntax;
 }
 
@@ -46,6 +47,11 @@ MStatus iBlastCmd::parseArgs(const MArgList& args) {
 		stat = argData.getFlagArgument(kFilenameFlag, 0, filename);
 	} else {
 		filename = "blastOut";
+	}
+	if (argData.isFlagSet(kPanelFlag)) {
+		argData.getFlagArgument(kPanelFlag, 0, panel);
+	} else {
+		panel = "modelPanel1";
 	}
 	return stat;
 }
@@ -105,7 +111,13 @@ MStatus iBlastCmd::doIt(const MArgList& args) {
 	}
 
 	// change this to support oculus 2 views at once?
-	M3dView view = M3dView::active3dView();
+	M3dView view;
+	stat = M3dView::getM3dViewFromModelPanel(panel, view);
+	if ( !stat ) {
+		sprintf( msgBuffer, "Failed to get view for %s command\n", commandName );
+		MGlobal::displayError( msgBuffer );
+		return stat;
+	}
 
 	// this can change - see resizing M3dView
 	fWidth = (short)view.portWidth();

@@ -24,6 +24,8 @@ typedef unsigned char uchar_t;
 #define kOnscreenFlagLong   "-onscreen"
 #define kFilenameFlag       "-f"
 #define kFilenameFlagLong   "-filename"
+#define kPanelFlag 			"-p"
+#define kPanelFlagLong		"-panel"
 #define commandName         "iBlast"
 #define CREATOR 			"Sacha Best"
 
@@ -52,6 +54,7 @@ private:
 	MStatus         parseArgs(const MArgList& args);
 	bool            onscreen;
 	MString         filename;
+	MString 		panel;
 	MTime           start;
 	MyMPxGlBuffer   *offBuff;
 	short           fHeight;

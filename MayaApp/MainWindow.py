@@ -5,6 +5,8 @@ from FrameServer.server import FrameServer
 from RegistrationServer.server import RegistrationServer
 from MayaApp.log.XStream import XStream
 from MayaApp.log.Log import *
+from MayaApp.scene_creator import Scene
+import logging
 
 PROJECT_DIR = '/Users/sachabest/Documents/gits/cis099'
 COLOR_INFO = QColor("cyan")
@@ -27,6 +29,7 @@ class MainWindow(QMainWindow):
 		# configure stuff here
 		self.resize(600, 600)
 		self.setWindowTitle("Maya VR")
+		self.registration_on = False
 		XStream.stdout().messageWritten.connect(self.write_info_text)
 		XStream.stderr().messageWritten.connect(self.write_error_text)
 		self.registration_server = RegistrationServer(self.registered_client, self.bad_register_client)
@@ -34,6 +37,8 @@ class MainWindow(QMainWindow):
 		self.ui.filename_1.setText(self.filename_1)
 		self.ui.filename_2.setText(self.filename_2)
 		self.ui.console.setFontPointSize(16)
+		self.ui.graphics_1.setScene( QGraphicsScene(0, 0, 250, 200))
+		self.ui.graphics_2.setScene( QGraphicsScene(0, 0, 250, 200))
 
 	def start_registration_server(self):
 		self.registration_server.start()
@@ -48,6 +53,11 @@ class MainWindow(QMainWindow):
 			self.server.quit()
 			self.server = None
 			print "Killed Frame Server"
+		if self.scene:
+			self.scene.clean()
+			self.scene = None
+			print 'Killed Scene'
+		event.accept()
 
 	def get_client(self):
 		return self.client[0] + ":" + str(self.client[1])
@@ -82,24 +92,40 @@ class MainWindow(QMainWindow):
 		logger.info("Server started.")
 		self.on = True
 
+	def load_images(self, file_1, file_2):
+		self.ui.graphics_1.scene().clear()
+		self.ui.graphics_2.scene().clear()
+		self.ui.graphics_1.scene().addPixmap(QPixmap.fromImage(QImage(file_1, "jpg")))
+		self.ui.graphics_2.scene().addPixmap(QPixmap.fromImage(QImage(file_2, "jpg")))
+		self.ui.graphics_1.scene().update()
+		self.ui.graphics_2.scene().update()
+
 	def start_stop_server(self):
 		if not self.on:
-			if self.client is None:
+			if self.client is None and not self.registration_on:
 				self.start_registration_server()
-				# error_msg = QErrorMessage(parent=self)
-				# error_msg.showMessage("Cannot start the server without a connected client. Please connect one first.")
+				self.registration_on = True
+				self.scene = Scene(logger)
+			elif self.client is None and self.registration_on:
+				self.registration_server.quit()
+				self.registration_server = None
+				self.registration_on = False
+				logger.info("server stopped.")
 			else:
-				self.server = FrameServer(self.client, (self.filename_1, self.filename_2))
+				self.server = FrameServer(self.client, (self.filename_1, self.filename_2), (Scene.panel_left, Scene.panel_right))
 				# cannot start the server without a client
+				self.server.notify = self.load_images
 				self.server.start()
 				logger.info("Server started.")
 				logger.info("Sending frames to " + self.get_client())
 				self.on = True
 		else:
 			self.server.quit()
+			self.scene.clean()
+			self.scene = None
 			self.on = False
-			logger.info("Server stopped.")
-
+			logger1 = logging.getLogger(__name__)
+			logger1.info("Server stopped.")
 
 	def register_client(self, client):
 		self.client = client

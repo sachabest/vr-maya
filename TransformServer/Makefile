@@ -17,7 +17,7 @@ ifndef INCL_BUILDRULES
 # Include platform specific build settings
 #
 TOP := ..
-include $(TOP)/buildrules
+include $(TOP)/config_16/buildrules
 
 
 #

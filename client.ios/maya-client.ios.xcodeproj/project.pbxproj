@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		1941FC291CD2B594002CBC20 /* TransformServer.m in Sources */ = {isa = PBXBuildFile; fileRef = 1941FC281CD2B594002CBC20 /* TransformServer.m */; };
 		19876C461C516B04009E2A4C /* FrameServer.m in Sources */ = {isa = PBXBuildFile; fileRef = 19876C451C516B04009E2A4C /* FrameServer.m */; };
 		1992801C1C8E2C4D00027C1A /* RegistrationServer.m in Sources */ = {isa = PBXBuildFile; fileRef = 1992801B1C8E2C4D00027C1A /* RegistrationServer.m */; };
 		1992801F1C8E2DDE00027C1A /* IPManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 1992801E1C8E2DDE00027C1A /* IPManager.m */; };
@@ -20,6 +21,8 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		1941FC271CD2B594002CBC20 /* TransformServer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TransformServer.h; sourceTree = "<group>"; };
+		1941FC281CD2B594002CBC20 /* TransformServer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TransformServer.m; sourceTree = "<group>"; };
 		19876C441C516B04009E2A4C /* FrameServer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FrameServer.h; sourceTree = "<group>"; };
 		19876C451C516B04009E2A4C /* FrameServer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FrameServer.m; sourceTree = "<group>"; };
 		1992801A1C8E2C4D00027C1A /* RegistrationServer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RegistrationServer.h; sourceTree = "<group>"; };
@@ -71,6 +74,8 @@
 				1992801B1C8E2C4D00027C1A /* RegistrationServer.m */,
 				1992801D1C8E2DDE00027C1A /* IPManager.h */,
 				1992801E1C8E2DDE00027C1A /* IPManager.m */,
+				1941FC271CD2B594002CBC20 /* TransformServer.h */,
+				1941FC281CD2B594002CBC20 /* TransformServer.m */,
 			);
 			name = Models;
 			sourceTree = "<group>";
@@ -177,7 +182,7 @@
 				TargetAttributes = {
 					19961D6B1C5165A100552EC5 = {
 						CreatedOnToolsVersion = 7.1.1;
-						DevelopmentTeam = Q4N479MPW3;
+						DevelopmentTeam = VU59R57FGM;
 					};
 				};
 			};
@@ -266,6 +271,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				1992801F1C8E2DDE00027C1A /* IPManager.m in Sources */,
+				1941FC291CD2B594002CBC20 /* TransformServer.m in Sources */,
 				19961D771C5165A100552EC5 /* MainViewController.m in Sources */,
 				1992801C1C8E2C4D00027C1A /* RegistrationServer.m in Sources */,
 				19961D741C5165A100552EC5 /* AppDelegate.m in Sources */,
@@ -386,6 +392,45 @@
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				INFOPLIST_FILE = client.ios/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				OTHER_LDFLAGS = (
+					"$(inherited)",
+					"-ObjC",
+					"-l\"CocoaAsyncSocket\"",
+					"-l\"M13ProgressSuite\"",
+					"-l\"c++\"",
+					"-framework",
+					"\"AVFoundation\"",
+					"-framework",
+					"\"Accelerate\"",
+					"-framework",
+					"\"AudioToolbox\"",
+					"-framework",
+					"\"CFNetwork\"",
+					"-framework",
+					"\"CoreGraphics\"",
+					"-framework",
+					"\"CoreImage\"",
+					"-framework",
+					"\"CoreMedia\"",
+					"-framework",
+					"\"CoreMotion\"",
+					"-framework",
+					"\"CoreVideo\"",
+					"-framework",
+					"\"Foundation\"",
+					"-framework",
+					"\"GLKit\"",
+					"-framework",
+					"\"MediaPlayer\"",
+					"-framework",
+					"\"OpenGLES\"",
+					"-framework",
+					"\"QuartzCore\"",
+					"-framework",
+					"\"Security\"",
+					"-framework",
+					"\"UIKit\"",
+				);
 				PRODUCT_BUNDLE_IDENTIFIER = "com.sachabest.maya-client-ios";
 				PRODUCT_NAME = "maya-client.ios";
 			};
@@ -399,6 +444,45 @@
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				INFOPLIST_FILE = client.ios/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				OTHER_LDFLAGS = (
+					"$(inherited)",
+					"-ObjC",
+					"-l\"CocoaAsyncSocket\"",
+					"-l\"M13ProgressSuite\"",
+					"-l\"c++\"",
+					"-framework",
+					"\"AVFoundation\"",
+					"-framework",
+					"\"Accelerate\"",
+					"-framework",
+					"\"AudioToolbox\"",
+					"-framework",
+					"\"CFNetwork\"",
+					"-framework",
+					"\"CoreGraphics\"",
+					"-framework",
+					"\"CoreImage\"",
+					"-framework",
+					"\"CoreMedia\"",
+					"-framework",
+					"\"CoreMotion\"",
+					"-framework",
+					"\"CoreVideo\"",
+					"-framework",
+					"\"Foundation\"",
+					"-framework",
+					"\"GLKit\"",
+					"-framework",
+					"\"MediaPlayer\"",
+					"-framework",
+					"\"OpenGLES\"",
+					"-framework",
+					"\"QuartzCore\"",
+					"-framework",
+					"\"Security\"",
+					"-framework",
+					"\"UIKit\"",
+				);
 				PRODUCT_BUNDLE_IDENTIFIER = "com.sachabest.maya-client-ios";
 				PRODUCT_NAME = "maya-client.ios";
 			};

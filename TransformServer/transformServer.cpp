@@ -73,7 +73,7 @@ void transformServer::threadHandler(const char* serverName, const char* deviceNa
     
     // linux socket configuration
     serverAddress.sin_family = AF_INET;
-    serverAddress.sin_port = htons(7555);
+    serverAddress.sin_port = htons(10001);
     serverAddress.sin_addr.s_addr = INADDR_ANY;
 
     // zero the input
@@ -156,6 +156,7 @@ void transformServer::threadHandler(const char* serverName, const char* deviceNa
                     for (int i = 0; i < 3; i++) {
                         doubleData[i] = sa[i].isDouble() ? sa[i].asDouble() : 0.0;
                     }
+                    cout << doubleData[0] << " " << doubleData[1] << " " << doubleData[2] < endl;
                 } else {
                     cout << "Input array wasn't three doubles. Skipping. " < endl;
                 }

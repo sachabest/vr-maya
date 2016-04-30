@@ -8,9 +8,8 @@ PROJECT_DIR = '/Users/sachabest/Documents/gits/cis099'
 PIP_ROOT = '/Applications/Autodesk/maya2016/Maya.app/Contents/MacOS'
 COMMAND_NAME = "iBlast.bundle"
 COMMAND_PATH = '/Blast/' + COMMAND_NAME
-
-cmds.unloadPlugin(COMMAND_NAME);
-cmds.loadPlugin(PROJECT_DIR + COMMAND_PATH);
+TRANSFORM_NAME = 'transformServer.bundle'
+TRANSFORM_PATH = '/transformServer/' + TRANSFORM_NAME
 
 if PROJECT_DIR not in sys.path:
 	sys.path.insert(0, PROJECT_DIR)
@@ -26,3 +25,8 @@ import FrameServer.server
 reload(FrameServer.server)
 import MayaApp.log.Log
 reload(MayaApp.log.Log)
+
+cmds.unloadPlugin(COMMAND_NAME);
+cmds.loadPlugin(PROJECT_DIR + COMMAND_PATH);
+cmds.unloadPlugin(TRANSFORM_NAME);
+cmds.loadPlugin(PROJECT_DIR + TRANSFORM_PATH);

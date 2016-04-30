@@ -41,4 +41,5 @@ public:
 
     static MTypeId      id;
 private:
+
 };
