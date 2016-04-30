@@ -20,8 +20,8 @@ class Scene(object):
         mel.eval('setNamedPanelLayout("VR")')
         mel.eval("lookThroughModelPanel " + self.cam_left + " modelPanel4;")
         mel.eval("lookThroughModelPanel " + self.cam_right + " modelPanel1;")
-        self.cube_test = cmds.cube(-2, 0, 10)
-        self.sphere_test = cmds.sphere(2, 0, 10)
+        # self.cube_test = cmds.polyCube(-2, 0, 10)
+        # self.sphere_test = cmds.polySphere(2, 0, 10)
 
     def clean(self):
         cmds.disconnectAttr(self.mpx_thread + '.outputRotate', self.cam_right + '.rotate')
@@ -29,4 +29,4 @@ class Scene(object):
         cmds.delete(self.cam_left)
         cmds.delete(self.cam_right)
         cmds.delete(self.mpx_thread)
-        logger.info("Cleaned up.")
+        # self.logger.info("Cleaned up.")

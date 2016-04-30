@@ -33,9 +33,11 @@
     [alert addTextFieldWithConfigurationHandler:^(UITextField * _Nonnull textField) {
         textField.placeholder = @"IP Address";
     }];
-    UIAlertAction* defaultAction = [UIAlertAction actionWithTitle:@"OK" style:UIAlertActionStyleDefault handler:^(UIAlertAction * action) {
-//        [server bindTo:alert.textFields[0].text onPort:SERVER_PORT];
-        [server bindToDefault];
+    UIAlertAction* defaultAction = [UIAlertAction actionWithTitle:@"OK" style:
+        UIAlertActionStyleDefault handler:^(UIAlertAction * action) {
+        NSString *ip = alert.textFields[0].text;
+        [server bindTo:ip onPort:SERVER_REG_PORT];
+//        [server bindToDefault];
         [server registerFrameServer:10000 withCallback:^{
             dispatch_async(dispatch_get_main_queue(), ^{
                 [loadingHUD hide:YES];
@@ -44,12 +46,12 @@
             [[FrameServer instance] registerCallback:^(UIImage *img1, UIImage *img2) {
                 dispatch_async(dispatch_get_main_queue(), ^{
                     [_imageView1 setImage:img1];
-                    _imageView1.contentMode = UIViewContentModeScaleAspectFill;
+                    _imageView1.contentMode = UIViewContentModeScaleAspectFit;
                     [_imageView2 setImage:img2];
-                    _imageView2.contentMode = UIViewContentModeScaleAspectFill;
+                    _imageView2.contentMode = UIViewContentModeScaleAspectFit;
                 });
             }];
-            [[TransformServer instance] bindToDefault];
+            [[TransformServer instance] bindTo:ip onPort:SERVER_TRANS_PORT];
             [[TransformServer instance] startSendingData];
         }];
     }];

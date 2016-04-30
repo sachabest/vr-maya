@@ -41,7 +41,7 @@ static TransformServer *instance;
         thread = NULL;
     }
 }
-
+    
 - (void)startSendingData {
     [gyroManager startDeviceMotionUpdatesToQueue:gyroQueue withHandler:^(CMDeviceMotion * _Nullable motion, NSError * _Nullable error) {
         toWrite = [[NSString stringWithFormat:@"%f %f %f", motion.attitude.roll, motion.attitude.pitch, motion.attitude.yaw] dataUsingEncoding:NSUTF8StringEncoding];

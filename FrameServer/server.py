@@ -56,7 +56,7 @@ class FrameServer(QtCore.QThread):
 		self.sock.close()
 
 	def quit(self):
-		self.datafile.close()
+		# self.datafile.close()
 		self.should_terminate = True
 
 	def blast_background(self):

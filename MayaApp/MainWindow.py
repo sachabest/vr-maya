@@ -39,6 +39,10 @@ class MainWindow(QMainWindow):
 		self.ui.console.setFontPointSize(16)
 		self.ui.graphics_1.setScene( QGraphicsScene(0, 0, 250, 200))
 		self.ui.graphics_2.setScene( QGraphicsScene(0, 0, 250, 200))
+		self.ui.graphics_1.show()
+		self.ui.graphics_2.show()
+		self.img1 = None
+		self.img2 = None
 
 	def start_registration_server(self):
 		self.registration_server.start()
@@ -95,8 +99,14 @@ class MainWindow(QMainWindow):
 	def load_images(self, file_1, file_2):
 		self.ui.graphics_1.scene().clear()
 		self.ui.graphics_2.scene().clear()
-		self.ui.graphics_1.scene().addPixmap(QPixmap.fromImage(QImage(file_1, "jpg")))
-		self.ui.graphics_2.scene().addPixmap(QPixmap.fromImage(QImage(file_2, "jpg")))
+		self.img1 = QImageReader(file_1)
+		self.img1.read()
+		self.img2 = QPixmap(file_2)
+		logger.info(self.img1.error())
+		self.ui.graphics_1.scene().addPixmap(self.img1)
+		self.ui.graphics_2.scene().addPixmap(self.img2)
+		self.ui.graphics_1.scene().setSceneRect(self.img1.rect())
+		self.ui.graphics_2.scene().setSceneRect(self.img2.rect())
 		self.ui.graphics_1.scene().update()
 		self.ui.graphics_2.scene().update()
 
@@ -106,9 +116,10 @@ class MainWindow(QMainWindow):
 				self.start_registration_server()
 				self.registration_on = True
 				self.scene = Scene(logger)
+				logger.info(QImageReader.supportedImageFormats())
 			elif self.client is None and self.registration_on:
 				self.registration_server.quit()
-				self.registration_server = None
+				# self.registration_server = None
 				self.registration_on = False
 				logger.info("server stopped.")
 			else:
