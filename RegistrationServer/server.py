@@ -1,9 +1,9 @@
-import SocketServer, sys, logging
+import SocketServer, sys, logging, socket
 from maya import cmds
 from PySide.QtCore import *
 from MayaApp.log.Log import *
 
-HOST = "localhost"
+HOST = socket.gethostbyname(socket.gethostname())
 PORT = 9999
 
 class ServerWrapper(QObject):

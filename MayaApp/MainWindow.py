@@ -68,7 +68,8 @@ class MainWindow(QMainWindow):
 
 	def registered_client(self, client):
 		self.client = client
-		logger.info("Registered: " + self.get_client())
+		logger.info("Registerd client at " + self.get_client())
+		self.scene.register_client(client[0])
 
 	def bad_register_client(self, client):
 		logger.error("Couldn't register: " + client[0] + ":" + str(client[1]))
@@ -99,12 +100,10 @@ class MainWindow(QMainWindow):
 	def load_images(self, file_1, file_2):
 		self.ui.graphics_1.scene().clear()
 		self.ui.graphics_2.scene().clear()
-		self.img1 = QImageReader(file_1)
-		self.img1.read()
-		self.img2 = QPixmap(file_2)
-		logger.info(self.img1.error())
-		self.ui.graphics_1.scene().addPixmap(self.img1)
-		self.ui.graphics_2.scene().addPixmap(self.img2)
+		self.img1 = QImage(file_1)
+		self.img2 = QImage(file_2)
+		self.ui.graphics_1.scene().addPixmap(QPixmap.fromImage(self.img1))
+		self.ui.graphics_2.scene().addPixmap(QPixmap.fromImage(self.img2))
 		self.ui.graphics_1.scene().setSceneRect(self.img1.rect())
 		self.ui.graphics_2.scene().setSceneRect(self.img2.rect())
 		self.ui.graphics_1.scene().update()
@@ -113,10 +112,9 @@ class MainWindow(QMainWindow):
 	def start_stop_server(self):
 		if not self.on:
 			if self.client is None and not self.registration_on:
-				self.start_registration_server()
 				self.registration_on = True
 				self.scene = Scene(logger)
-				logger.info(QImageReader.supportedImageFormats())
+				self.start_registration_server()
 			elif self.client is None and self.registration_on:
 				self.registration_server.quit()
 				# self.registration_server = None
@@ -125,7 +123,7 @@ class MainWindow(QMainWindow):
 			else:
 				self.server = FrameServer(self.client, (self.filename_1, self.filename_2), (Scene.panel_left, Scene.panel_right))
 				# cannot start the server without a client
-				self.server.notify = self.load_images
+				self.server.notify_done.connect(self.load_images)
 				self.server.start()
 				logger.info("Server started.")
 				logger.info("Sending frames to " + self.get_client())
@@ -137,7 +135,3 @@ class MainWindow(QMainWindow):
 			self.on = False
 			logger1 = logging.getLogger(__name__)
 			logger1.info("Server stopped.")
-
-	def register_client(self, client):
-		self.client = client
-		logger.info("Registerd client at " + self.get_client())

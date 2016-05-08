@@ -13,6 +13,7 @@ class FrameServer(QtCore.QThread):
 	destination = None
 	filenames = None
 	should_terminate = False
+	notify_done = QtCore.Signal(str, str)
 
 	def __init__(self, destination, filenames, panels):
 		QtCore.QThread.__init__(self)
@@ -23,12 +24,12 @@ class FrameServer(QtCore.QThread):
 		self.panels = panels
 		self.filenames = filenames
 		# self.datafile = open("/Users/sachabest/Desktop/data.txt", 'w')
-		self.notify = None
 
 	def send(self):
 		self.blast_background()
 		self.send_one_frame(self.filenames[0])
 		self.send_one_frame(self.filenames[1])
+		self.notify_done.emit(self.filenames[0], self.filenames[1])
 
 	def send_one_frame(self, filename):
 		with open(filename, 'r') as f:
@@ -47,8 +48,6 @@ class FrameServer(QtCore.QThread):
 		if rcv != "k":
 			logger.error("Client didn't respond appropriately. Expecting: \"k\". Got: " + rcv);
 			self.quit();
-		if self.notify:
-			maya.utils.executeInMainThreadWithResult(self.notify, self.filenames[0], self.filenames[1])
 
 	def run(self):
 		while not self.should_terminate:

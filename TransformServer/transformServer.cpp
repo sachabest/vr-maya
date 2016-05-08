@@ -68,12 +68,13 @@ void transformServer::threadHandler(const char* serverName, const char* deviceNa
     // alloc socket stuff on the stack
     int sock;
     int bytesRead;
+    int port = 10001;
     socklen_t addressLength;
     struct sockaddr_in serverAddress, clientAddress;
     
     // linux socket configuration
     serverAddress.sin_family = AF_INET;
-    serverAddress.sin_port = htons(10001);
+    serverAddress.sin_port = htons(port);
     serverAddress.sin_addr.s_addr = INADDR_ANY;
 
     // zero the input
@@ -92,6 +93,8 @@ void transformServer::threadHandler(const char* serverName, const char* deviceNa
         sizeof(struct sockaddr)) == -1) {
         cout << "Couldn't bind to port. Exiting. " << endl;
         return;
+    } else {
+        cout << "UDP server running on port: " << port << endl;
     }
 
     MStatus status;
@@ -115,7 +118,7 @@ void transformServer::threadHandler(const char* serverName, const char* deviceNa
         }
 
         if (!FD_ISSET(sock, &read_set)) {
-            cout < "No file descriptor. Continuing. " << endl;
+            cout << "No file descriptor. Continuing. " << endl;
             continue;
         }
 
@@ -126,16 +129,18 @@ void transformServer::threadHandler(const char* serverName, const char* deviceNa
         const char *receivedFromServer = inet_ntoa(clientAddress.sin_addr);
         unsigned short receivedFromPort = ntohs(clientAddress.sin_port);
         
-        if (receivedFromServer == NULL)
+        if (receivedFromServer == NULL) {
+            cout << "Got null data." << endl;
             continue;
+        }
         
         printf("(%s , %d) connection : %s \n",receivedFromServer,receivedFromPort, receiveBuffer);
 
         if (0 != strcmp(serverName, receivedFromServer)) {
-            cout << "Server name doesn't match sending server. Continuing. " < endl;
+            cout << "Server name doesn't match sending server. Continuing. " << endl;
             continue;
         }
-
+        cout << "Reading data..." << endl;
         // Get the storage once we have data from the server
         status = acquireDataStorage(buffer);
 
@@ -156,9 +161,9 @@ void transformServer::threadHandler(const char* serverName, const char* deviceNa
                     for (int i = 0; i < 3; i++) {
                         doubleData[i] = sa[i].isDouble() ? sa[i].asDouble() : 0.0;
                     }
-                    cout << doubleData[0] << " " << doubleData[1] << " " << doubleData[2] < endl;
+                    cout << doubleData[0] << " " << doubleData[1] << " " << doubleData[2] << endl;
                 } else {
-                    cout << "Input array wasn't three doubles. Skipping. " < endl;
+                    cout << "Input array wasn't three doubles. Skipping. " << endl;
                 }
             }
             pushThreadData(buffer);

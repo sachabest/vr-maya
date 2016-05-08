@@ -18,6 +18,10 @@
     CMMotionManager *gyroManager;
     NSOperationQueue *gyroQueue;
     NSData *toWrite;
+    NSMutableArray *storedData;
+    NSMutableArray *previousVelocity;
+    float t;
+    float dt;
 }
 
 

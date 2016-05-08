@@ -23,6 +23,11 @@ class Scene(object):
         # self.cube_test = cmds.polyCube(-2, 0, 10)
         # self.sphere_test = cmds.polySphere(2, 0, 10)
 
+    def register_client(self, client):
+        cmds.setAttr(self.mpx_thread + '.serverName', client, type="string")
+        cmds.setAttr(self.mpx_thread + '.live', True)
+        self.logger.info("Configured UDP Server")
+
     def clean(self):
         cmds.disconnectAttr(self.mpx_thread + '.outputRotate', self.cam_right + '.rotate')
         cmds.disconnectAttr(self.mpx_thread + '.outputRotate', self.cam_left + '.rotate')

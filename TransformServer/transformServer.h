@@ -1,4 +1,4 @@
-
+#define LINUX
 #ifdef LINUX // change to OSX l8r
 #include <sys/types.h>
 #include <sys/socket.h>
@@ -21,6 +21,8 @@
 #include <maya/MDataBlock.h>
 #include <maya/MFnNumericAttribute.h>
 #include <maya/MPxClientDeviceNode.h>
+
+using namespace std;
 
 class transformServer : public MPxClientDeviceNode {
 public:
