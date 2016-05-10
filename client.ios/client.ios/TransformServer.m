@@ -32,6 +32,9 @@ static TransformServer *instance;
         for (int i = 0; i < 3; i++) {
             storedData[i] = [[NSMutableArray alloc] init];
         }
+        movementDirections = [[NSMutableArray alloc] initWithCapacity:3];
+        previousVelocity = [[NSMutableArray alloc] initWithCapacity:3];
+        directionValid = [[NSMutableArray alloc] initWithCapacity:3];
     }
 }
 
@@ -56,35 +59,48 @@ static TransformServer *instance;
     return delta;
 }
 
+- (NSArray *)accel:(NSArray *)delta {
+    NSMutableArray *ret = [[NSMutableArray alloc] initWithCapacity:delta.count];
+    for (int i = 0; i < delta.count; i++) {
+        NSNumber *d = [NSNumber numberWithDouble:[delta[i] floatValue] / dt];
+        ret[i] = d;
+    }
+    return ret;
+}
+
 float rad2deg(float input) {
     return input * 180.0f / M_PI;
 }
 
 - (void)startSendingData {
     [gyroManager startDeviceMotionUpdatesToQueue:gyroQueue withHandler:^(CMDeviceMotion * _Nullable motion, NSError * _Nullable error) {
-//        double old_t = t;
-//        dt = [[NSDate date] timeIntervalSince1970] - old_t;
-//        t = dt + old_t;
-//        
-//        NSArray *currentVelocity = @[ [NSNumber numberWithDouble:motion.rotationRate.x], [NSNumber numberWithDouble:motion.rotationRate.y], [NSNumber numberWithDouble:motion.rotationRate.z]];
-//        NSArray *delta = [self delta:currentVelocity old:previousVelocity];
-//        
-//        bool estimate = true;
-//        
-//        // first we should see if the second derivative is positive to ensure continuous movement
-//        for (int i = 0; i < 3; i++) {
-//            if ([((NSNumber *)delta[i]) floatValue] < 0) {
-//                estimate = false;
-//                break;
-//            }
-//        }
+        double old_t = t;
+        dt = [[NSDate date] timeIntervalSince1970] - old_t;
+        t = dt + old_t;
+        NSMutableArray *toSend = [@[ [NSNumber numberWithDouble:motion.attitude.pitch], [NSNumber numberWithDouble:motion.attitude.yaw], [NSNumber numberWithDouble:motion.attitude.roll]] mutableCopy];
+        NSArray *currentVelocity = @[ [NSNumber numberWithDouble:motion.rotationRate.x], [NSNumber numberWithDouble:motion.rotationRate.y], [NSNumber numberWithDouble:motion.rotationRate.z]];
+        NSArray *delta = [self delta:currentVelocity old:previousVelocity];
+        NSArray *accel = [self accel:delta];
+        
+        for (int i = 0; i < currentVelocity.count; i++) {
+            NSNumber *direction = [NSNumber numberWithDouble:[currentVelocity[i] floatValue] / fabs([currentVelocity[i] floatValue])];
+            if (movementDirections[i] && [movementDirections[i] floatValue] * [direction floatValue] > 0) {
+                // we are moving same direction
+                // now, how can we use acceleration to predict the next movement step
+                toSend[i] = [NSNumber numberWithDouble:[toSend[i] floatValue] + ([currentVelocity[i] floatValue] * dt)];
+                // integrate second order continuity later
+            } else {
+                // we are moving different direction, reset and do not predict
+                movementDirections[i] = [NSNumber numberWithDouble:[movementDirections[i] floatValue] * -1];
+            }
+        }
         
         // use dt to estimate next rotation values via 2nd order continuity assumptions
         // i.e. we assume the next dt will be the same as this one, so we have acceleration
         // for each value, we have p2 = p1 +
         
         
-        NSData *data = [[NSString stringWithFormat:@"%f %f %f", rad2deg(motion.attitude.roll), rad2deg(motion.attitude.pitch), rad2deg(motion.attitude.yaw)] dataUsingEncoding:NSUTF8StringEncoding];
+        NSData *data = [[NSString stringWithFormat:@"%f %f %f", rad2deg([toSend[0] floatValue]), rad2deg([toSend[1] floatValue]), rad2deg([toSend[2] floatValue])] dataUsingEncoding:NSUTF8StringEncoding];
         [socket sendData:data withTimeout:-1 tag:0];
     }];
 }

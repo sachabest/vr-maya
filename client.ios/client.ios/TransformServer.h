@@ -20,6 +20,8 @@
     NSData *toWrite;
     NSMutableArray *storedData;
     NSMutableArray *previousVelocity;
+    NSMutableArray *movementDirections;
+    NSMutableArray *directionValid;
     float t;
     float dt;
 }
