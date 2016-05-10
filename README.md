@@ -1,4 +1,5 @@
-## CIS 099 - Independent Study
+## VR Scene Navigation for iOS and Autodesk Maya
+ CIS 099 - Independent Study
 
 ### Repository Organization
 
